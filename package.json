@@ -1,0 +1,31 @@
+{
+  "name": "formulario_gabrielmagalhaes",
+  "version": "1.0.0",
+  "description": "formulario express",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BielMagalhaes/FORMULARIO_GABRIELMAGALHAES.git"
+  },
+  "keywords": [
+    "javascript",
+    "nodejs",
+    "http",
+    "express",
+    "post"
+  ],
+  "author": "Gabriel Magalhaes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BielMagalhaes/FORMULARIO_GABRIELMAGALHAES/issues"
+  },
+  "homepage": "https://github.com/BielMagalhaes/FORMULARIO_GABRIELMAGALHAES#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
