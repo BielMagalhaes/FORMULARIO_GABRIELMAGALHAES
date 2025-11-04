@@ -2,6 +2,7 @@ import express from "express";
 const server = express();
 var listaPruduto = [];
 
+server.use(express.urlencoded({ extended: true }));
 
 const host = "localhost";
 const porta = 3000;
@@ -53,7 +54,7 @@ server.get("/cadastro", (req, res) => {
                     </head>
                     <body>
                     <h1>Cadastro de Produto</h1>
-                    <form method="POST" action="/cadastrar-produto">
+                    <form method="POST" action="/cadastrarproduto">
                         <label for="nomeProduto">Nome do Produto:</label>
                         <input type="text" id="nomeProduto" name="nomeProduto" required>
 
@@ -81,8 +82,45 @@ server.get("/cadastro", (req, res) => {
 `)
 });
 server.post('/cadastrar-produto', (req, res) => {
-    console.log("PRODUTO CADASTRADO COM SUCESSO !!");
-    listaPruduto.push();
+    const { nomeProduto, categoria, preco, quantidade, descricao } = req.body;
+    listaPruduto.push({nomeProduto,categoria,preco,quantidade,descricao});
+    res.redirect("/listaProduto");
+});
+server.get("/listaProduto",(req, res)=>{
+    let conteudo = `<!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>Document</title>
+                        </head>
+                        <body>
+                            <h1>Produto Cadastrado com Sucesso!</h1>
+                                <p><strong>Nome:</strong> ${nomeProduto}</p>
+                                <p><strong>Categoria:</strong> ${categoria}</p>
+                                <p><strong>Preço:</strong> R$ ${preco}</p>
+                                <p><strong>Quantidade:</strong> ${quantidade}</p>
+                                <p><strong>Descrição:</strong> ${descricao}</p>
+                            <a href="/cadastroproduto">Voltar</a>
+                        </body>
+                        </html>`;
+    for(let i=0;i< listaPruduto.length;i++){
+        conteudo+=`
+            <tr>
+                <td>${listaPruduto[i].nomeProduto}</td>
+                <td>${listaPruduto[i].categoria}</td>
+                <td>${listaPruduto[i].preco}</td>
+                <td>${listaPruduto[i].quantidade}</td>
+                <td>${listaPruduto[i].descricao}</td>
+            </tr>
+        `;
+    }
+    conteudo+=`
+            </body>
+        </html>
+    `
+
+    res.send(conteudo);
 });
 
 server.listen(porta, host, () => {
